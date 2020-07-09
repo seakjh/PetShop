@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"
+	id="handlerMapping"/>
+	
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+	id="viewResolver" p:prefix="/" p:suffix=".jsp"/>
+
+	<context:component-scan base-package="com.pet">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+	
+	<!-- 정적자원(image, html, css, js, 동영상..)까지 
+	DispatcherServlet이 요청을 처리하지 않게 하기
+	따라서 아래의 태그를 등록하면, 다시 디폴트 서블릿이 정상화된다 -->
+	<mvc:default-servlet-handler/>
+	<mvc:annotation-driven/>
+ 	<!-- <mvc:resources location="/" mapping="/**"/> -->
+	
+</beans>
