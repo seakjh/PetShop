@@ -5,10 +5,20 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AdminService {
-	@Autowired(required = true)
+	@Autowired
 	private AdminDAO adminDAO;
 	
 	public Admin loginCheck(Admin admin) {
 		return adminDAO.loginCheck(admin);
 	}
+	
+	
 }
+
+
+
+
+
+
+
+

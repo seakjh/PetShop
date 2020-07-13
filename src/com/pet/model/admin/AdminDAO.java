@@ -6,12 +6,19 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class AdminDAO {
-	@Autowired(required = true)
+	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 	
 	public Admin loginCheck(Admin admin) {
-		Admin obj = null;
-		obj = sessionTemplate.selectOne("Admin.loginCheck", admin);
+		Admin obj=null;
+		obj=sessionTemplate.selectOne("Admin.loginCheck", admin);
 		return obj;
 	}
+	
 }
+
+
+
+
+
+

@@ -1,9 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
@@ -136,24 +134,22 @@ input[type=button]:hover {
 }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript">
-$(function() {
-	//login버튼 누르면..
-	$("input[type='button']").click(function() {
+<script>
+$(function(){
+	//로그인 버튼 누르면...
+	$("input[type='button']").click(function(){
 		$("form").attr({
 			"action":"/admin/login",
-			"method":"POST"
+			"method":"post"
 		});
 		$("form").submit();
+		
 	});
 });
+
 </script>
 </head>
 <body>
-
-<h2>Responsive Social Login Form</h2>
-<p>Resize the browser window to see the responsive effect. When the screen is less than 650px wide, make the two columns stack on top of each other instead of next to each other.</p>
-
 <div class="container">
   <form>
     <div class="row">
@@ -179,8 +175,8 @@ $(function() {
           <p>Or sign in manually:</p>
         </div>
 
-        <input type="text" name="id" placeholder="Username" required>
-        <input type="password" name="password" placeholder="Password" required>
+        <input type="text" 		name="id" 			placeholder="Username" required>
+        <input type="password" name="password" 	placeholder="Password" required>
         <input type="button" value="Login">
       </div>
       

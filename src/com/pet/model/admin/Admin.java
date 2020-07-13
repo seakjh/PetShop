@@ -5,7 +5,8 @@ public class Admin {
 	private String id;
 	private String password;
 	private String name;
-	//
+	
+	
 	public int getAdmin_id() {
 		return admin_id;
 	}
@@ -15,6 +16,7 @@ public class Admin {
 	public String getId() {
 		return id;
 	}
+	
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -30,5 +32,8 @@ public class Admin {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	
+	
 	
 }
