@@ -70,13 +70,26 @@ tr:nth-child(even) {
 <script type="text/javascript">
 $(function(){
 	$("input[type='checkbox']").click(function() {
-		alert();
+		copy();
+		$("input[name='raddr']").focus();
 	});
 });
 
 //주문자 정보를 받을 사람으로 옮기기
 function copy() {
-	//
+	var cname = 	$("input[name='cname']").val();
+	var cphone = 	$("input[name='cphone']").val();
+
+	$("input[name='receiver.rname']").val(cname);
+	$("input[name='receiver.rphone']").val(cphone);
+}
+
+function pay() {
+	$("form").attr({
+		"action":"/shop/step2",
+		"method":"post"
+	});
+	$("form").submit();
 }
 </script>
 </head>
@@ -84,89 +97,61 @@ function copy() {
 	<%@ include file="/include/header.jsp"%>
 	<div id="body">
 		<div id="content">
-			<h2 style="margin-top: 50px">결제하기</h2>
-				<table width="100%">
-					<tr>
-						<th>이미지</th>
-						<th>카테고리</th>
-						<th>상품명</th>
-						<th>브랜드</th>
-						<th>가격</th>
-						<th>수량</th>
-					</tr>
-					<%
-						int totalBuy = 0;
-					%>
-					<%
-						if (cartList != null) {
-					%>
-					<%
-						for (int i = 0; i < cartList.size(); i++) {
-					%>
-					<%
-						Cart cart = cartList.get(i);
-					%>
-					<%
-						//가격 * 갯수
-					totalBuy += cart.getPrice() * cart.getEa();
-					%>
-					<tr>
-						<td>
-							<img src="/data/<%=cart.getFilename()%>" width="45px" />
-						</td>
-						<td>
-								<%=cart.getCategory().getCategory_name()%>
-						</td>
-						<td>
-								<%=cart.getProduct_name()%>
-						</td>
-						<td>
-								<%=cart.getBrand()%>
-						</td>
-						<td>
-								<%=cart.getPrice()%>
-						</td>
-						<td>
-							<%=cart.getEa()%>개
-						</td>
-					</tr>
-					<%
-						}
-					%>
-					<%
-						} else {
-					%>
-					<td style="text-align: center" colspan="6">장바구니가 비어있습니다.</td>
-					<%
-						}
-					%>
-					<tr>
-						<td colspan="6" style="text-align: right">주문 금액 : <%=totalBuy%>원</td>
-					</tr>
-				</table>
-				<form>
-					<div id="buyer">
-						<input type="text" id="" name="" value="<%=obj.getName()%>">
-						<input type="text" id="" name="" value="<%=obj.getPhone()%>">
-						<input type="text" id="" name="" value="<%=obj.getEmail()%>">
-						<select id="country" name="country">
-							<option value="0">결제방법</option>
-							<option value="card">신용카드</option>
-							<option value="online">온라인 입금</option>
-							<option value="phone">핸드폰 결제</option>
-						</select> 
-					</div>
-					<div id="receiver">
-						<input type="checkbox"> 주문자 정보와 동일
-						<input type="text" id="fname" name="rname"  value="" placeholder="받는분 이름">
-						<input type="text" id="lname" name="rphone" placeholder="연락처">
-						<input type="text" id="lname" name="raddr" placeholder="주소">					
-					</div>
-				</form>
-				
-				<button>결제하기</button>
-				<button>쇼핑계속</button>
-				
+			<!-- 장바구니 표 -->
+			<h2>결제정보 입력</h2>
+
+			<table width="100%">
+				<tr>
+					<th>이미지</th>
+					<th>카테고리</th>
+					<th>상품명</th>
+					<th>브랜드</th>
+					<th>가격</th>
+					<th>수량</th>
+				</tr>
+				<%int totalBuy=0; %>
+				<%for(int i=0;i<cartList.size();i++){%>
+				<%Cart cart = cartList.get(i); %>
+				<%totalBuy+=(cart.getPrice()*cart.getEa()); %>
+				<tr>
+					<td><img src="/data/<%=cart.getFilename() %>" width="45px" /></td>
+					<td><%=cart.getCategory().getCategory_name() %></td>
+					<td><%=cart.getProduct_name() %></td>
+					<td><%=cart.getBrand() %></td>
+					<td><%=cart.getPrice() %></td>
+					<td><%=cart.getEa() %> 개</td>
+				</tr>
+				<%}%>
+				<tr>
+					<td colspan="6" style="text-align: right">구매 총액 : <%=totalBuy %>원
+					</td>
+				</tr>
+			</table>
+			<form>
+				<input type="hidden" name="total_pay" value="<%=totalBuy %>" />
+				<div id="buyer">
+					<input type="text" name="cname" value="<%=obj.getName()%>">
+					<input type="text" name="cphone" value="<%=obj.getPhone()%>">
+					<input type="text" name="email" value="<%=obj.getEmail()%>">
+					<input type="text" name="addr" value="<%=obj.getAddr()%>">
+					<select id="country" name="paymethod">
+						<option value="0">결제방법</option>
+						<option value="card">신용카드</option>
+						<option value="online">온라인 입금</option>
+						<option value="phone">핸드폰 결제</option>
+					</select>
+				</div>
+				<div id="receiver">
+					<input type="checkbox" name="same" value="yes" />주문자 정보와 동일 <input
+						type="text" name="receiver.rname" placeholder="받는분 이름"> <input
+						type="text" name="receiver.rphone" placeholder="받는 분 연락처">
+					<input type="text" name="receiver.raddr" placeholder="받는 분 주소">
+				</div>
+			</form>
+
+			<button onclick="pay()">결제하기</button>
+			<button>쇼핑계속</button>
+
 		</div>
 		<div class="featured">
 			<ul>

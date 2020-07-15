@@ -27,6 +27,7 @@
 		<include refid="select"/>where product_id=#{product_id}
 	</select>
 	
+	
 	<insert id="insert" parameterType="Product">
 		insert into product(product_id, category_id, product_name,price,brand,filename)
 		values(seq_product.nextval, #{category.category_id},#{product_name},#{price},#{brand},#{filename})
@@ -47,15 +48,3 @@
 	</update>
 	
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-

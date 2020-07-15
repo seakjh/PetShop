@@ -5,16 +5,24 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.pet.model.member.Member;
+import com.pet.model.order.OrderSummary;
 import com.pet.model.product.Cart;
+import com.pet.model.receiver.Receiver;
+import com.pet.model.shopping.ShoppingService;
 
 @Controller
 public class ShoppingController {
+	@Autowired
+	private ShoppingService shoppingService;
+	
 	//장바구니 담기!!
 	@RequestMapping(value="/shop/cart/regist",method=RequestMethod.POST)
 	public String regist(Model model, Cart cart, HttpSession session) {
@@ -113,10 +121,51 @@ public class ShoppingController {
 		
 		return "view/message";
 	}
+	
 	//구매1단계 화면 보기 (고객정보, 결제정보)
 	@RequestMapping(value="/shop/step1",method=RequestMethod.GET)
 	public String goStep1() {
 		//만일 db관련 작업이 있다면 여기서 처리..
 		return "shop/step1";
 	}
+
+	//구매2단계 화면 보기 (고객정보, 결제정보)
+	@RequestMapping(value="/shop/step2",method=RequestMethod.POST)
+	public String goStep2(Model model, HttpSession session,OrderSummary orderSummary) {
+		//주문상품정보 (장바구니) 세션이 있으므로 가져잘필요 x
+		
+		//고객정보 (멤버에 들어있음)세션이 있으므로 가져잘필요 x
+		
+		//받는자 정보 (파라미터에 있음) 저장 후 페이지에서 출력.
+		Receiver receiver = orderSummary.getReceiver();
+		System.out.println(receiver.getRname());
+		System.out.println(receiver.getRphone());
+		System.out.println(receiver.getRaddr());
+		
+		//jsp에서 보여질 정보 저장
+		model.addAttribute("orderSummary", orderSummary);
+		
+		return "shop/step2";
+	}
+	
+	//구매 3단계 요청 처리 (결제정보 입력 )
+	@RequestMapping(value="/shop/step3",method=RequestMethod.POST)
+	public String goStep3(Model model, HttpSession session, OrderSummary orderSummary) {
+		
+		//주문요약 정보 중 누가 샀는지를 결정!!
+		Member member = (Member)session.getAttribute("member");
+		orderSummary.setMember(member);
+		
+		//서비스에게 일시키기 
+		shoppingService.insert(orderSummary);
+		
+		//장바구니 모두 비우기!!
+		//내일은 주문 상세도 service에서 처리할 것임!!
+		
+		model.addAttribute("msg", "받을사람 정보는 "+orderSummary.getReceiver().getReceiver_id());
+		model.addAttribute("url", "/");
+		
+		return "view/message";
+	}
+
 }
