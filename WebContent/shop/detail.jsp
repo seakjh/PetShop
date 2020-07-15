@@ -27,26 +27,55 @@
 	margin-top: 50px;
 }
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	//장바구니 담기
+	$($("button")[0]).click(function() {
+		goCart();
+	});
+	
+	//바로구매
+	$($("button")[1]).click(function() {
+		
+	});
+});
+
+function goCart() {
+	$("form").attr({
+		"action":"/shop/cart/regist",
+		"method":"post"
+	});
+	$("form").submit();
+}
+</script>
 </head>
 <body>
 	<div id="header">
-		<a href="#" id="logo"><img src="/images/logo.gif" width="310"
-			height="114" alt=""></a>
 		<%@include file="/include/header.jsp"%>
 	</div>
 	<div id="body">
 		<div id="content">
 			<!-- 상세보기 -->
 			<div class="pic">
-				<img src="/data/<%=product.getFilename()%>">
+				<img src="/data/<%=product.getFilename()%>" width="50%">
 			</div>
 			<div class="spec">
-				<ul>
-					<li>카테고리 : <%=product.getCategory().getCategory_name() %></li>
-					<li>상품명 : <%=product.getProduct_name() %></li>
-					<li>가격 : <%=product.getPrice() %></li>
-					<li>브랜드 : <%=product.getBrand() %></li>
-				</ul>
+				<form action="">
+					<input type="hidden" name="product_id" value="<%=product.getProduct_id()%>">
+					<input type="hidden" name="category.category_id" value="<%=product.getCategory().getCategory_id()%>">
+					<input type="hidden" name="category.category_name" value="<%=product.getCategory().getCategory_name()%>">
+					<input type="hidden" name="product_name" value="<%=product.getProduct_name()%>">
+					<input type="hidden" name="price" value="<%=product.getPrice()%>">
+					<input type="hidden" name="brand" value="<%=product.getBrand()%>">
+					<input type="hidden" name="filename" value="<%=product.getFilename()%>">		
+					<ul>
+						<li>카테고리 : <%=product.getCategory().getCategory_name() %></li>
+						<li>상품명 : <%=product.getProduct_name() %></li>
+						<li>가격 : <%=product.getPrice() %></li>
+						<li>브랜드 : <%=product.getBrand() %></li>
+					</ul>
+				</form>
 				<button>장바구니</button>
 				<button>바로구매</button>
 			</div>				

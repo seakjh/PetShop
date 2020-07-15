@@ -1,7 +1,7 @@
 body {
 	margin:0;
 	padding:0;
-	background: url("../images/bg-body.gif");
+	background: url("/images/bg-body.gif");
 	background-repeat:repeat-x;
 }
 #page {
@@ -32,7 +32,7 @@ body {
 	width:107px;
 }
 #header ul.navigation li.active {
-	background:url("../images/menu.gif");
+	background:url("/images/menu.gif");
 	background-repeat:no-repeat;
 	background-position: 0 -160px;
 }
@@ -44,7 +44,7 @@ body {
 	font-weight:bold;
 	display:inline-block;
 	line-height:35px;
-	background:url("../images/menu-separator.gif");
+	background:url("/images/menu-separator.gif");
 	background-repeat:no-repeat;
 	background-position:right;
 	height:35px;
@@ -58,7 +58,7 @@ body {
 /**------------- Start of body style ----------------**/
   
   #body div.banner {
-	background:url("../images/dog.jpg");
+	background:url("/images/dog.jpg");
 	background-position:center;
 	background-repeat:no-repeat;
 	height:606px;
@@ -167,19 +167,19 @@ body {
 	width:640px;
 }
 #body #content .content ul.articles li {
-	background:url("../images/bg-blog-bottom-curve.gif");
+	background:url("/images/bg-blog-bottom-curve.gif");
 	background-position: left bottom;
 	background-repeat:no-repeat;
 }
 #body #content .content ul.articles li div {
 	height:98px;
 	line-height:78px;
-	background:url("../images/bg-blog-heading.gif");
+	background:url("/images/bg-blog-heading.gif");
 	background-position: top center;
 	background-repeat:no-repeat;
 }
 #body #content .content ul.articles li p {
-	background:url("../images/bg-blog-content.gif");
+	background:url("/images/bg-blog-content.gif");
 	background-position: left;
 	background-repeat:repeat-y;
 	margin:-10px 0 8px 0;
@@ -209,7 +209,7 @@ body {
 	font-size:28px;
 }
 #body #content .content div a.old {
-	background:url("../images/top-border-short.gif");
+	background:url("/images/top-border-short.gif");
 	background-position: top center;
 	background-repeat:no-repeat;
 	display:inline-block;
@@ -226,7 +226,7 @@ body {
 	margin-top:25px;
 }
 #body #content .content div a.new {
-	background:url("../images/top-border-short.gif");
+	background:url("/images/top-border-short.gif");
 	background-position: top center;
 	background-repeat:no-repeat;
 	display:inline-block;
@@ -249,7 +249,7 @@ body {
 	color:#000000;
 }
 #body #content .content ul.articles li a.heart {
-	background:url("../images/icons.gif");
+	background:url("/images/icons.gif");
 	background-position: 5px -374px;
 	background-repeat:no-repeat;
 	display:inline-block;
@@ -260,7 +260,7 @@ body {
 	  */
 	}
 #body #content .content ul.articles li a.facebook {
-	background:url("../images/icons.gif");
+	background:url("/images/icons.gif");
 	background-position: 0 -124px;
 	background-repeat:no-repeat;
 	display:inline-block;
@@ -271,7 +271,7 @@ body {
 	   
 	}
 #body #content .content ul.articles li a.twitter {
-	background:url("../images/icons.gif");
+	background:url("/images/icons.gif");
 	background-position: 0 -534px;
 	background-repeat:no-repeat;
 	display:inline-block;
@@ -286,7 +286,7 @@ body {
   
   
   #body #content .search {
-	background:url("../images/bg-search-form2.gif");
+	background:url("/images/bg-search-form2.gif");
 	background-position:center;
 	background-repeat:no-repeat;
 	width:540px;
@@ -296,7 +296,7 @@ body {
 	margin-bottom:80px;
 }
 #body #content .search input {
-	background:url("../images/input-search2.gif");
+	background:url("/images/input-search2.gif");
 	background-position:center;
 	background-repeat:no-repeat;
 	width:420px;
@@ -308,7 +308,7 @@ body {
 	color:#7f7154;
 }
 #body #content .search button {
-	background:url("../images/buttons.gif");
+	background:url("/images/buttons.gif");
 	background-position: 0 -270px;
 	background-repeat:no-repeat;
 	width:77px;

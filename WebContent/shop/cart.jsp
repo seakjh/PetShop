@@ -1,57 +1,147 @@
+<%@page import="com.pet.model.product.Cart"%>
+<%@page import="java.util.List"%>
 <%@page import="com.pet.model.product.Product"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
 <%
-	Product product = (Product)request.getAttribute("product");
+	List<Cart> cartList=(List)session.getAttribute("cartList");
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <title>Pet Shop</title>
 <meta charset="utf-8">
-<link href="/css/style.css" rel="stylesheet" type="text/css">
-<!--[if IE 6]><link href="css/ie6.css" rel="stylesheet" type="text/css"><![endif]-->
-<!--[if IE 7]><link href="css/ie7.css" rel="stylesheet" type="text/css"><![endif]-->
-<style type="text/css">
-.pic {
-	width: 50%;
-	height: 250px;
-	background: #ffc;
-	float: left;
-	margin-top: 50px;	
+<%@ include file="/include/head.jsp" %>
+<style>
+.pic{
+	width:50%;
+	height:250px;
+	background:yellow;
+	float:left;
+	margin-top:50px;
 }
-.spec {
-	width: 50%;
-	height: 250px;
-	background: #fcf;	
-	float: left;
-	margin-top: 50px;
+.spec{
+	width:50%;
+	height:250px;
+	background:green;
+	float:left;
+	margin-top:50px;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+  margin-top:50px;
+}
+th, td {
+  text-align: left;
+  padding: 16px;
+}
+tr:nth-child(even) {
+  background-color: #f2f2f2;
 }
 </style>
+
+<script type="text/javascript">
+$(function(){
+
+});
+
+function edit(product_id, id) {
+	var n = id.split("_")[1];
+	var ea = document.getElementById("t_"+n).value;
+	if(confirm(product_id+"상품의 갯수를 "+ea+"개로 수정할거?")) {
+		location.href="/shop/cart/edit?product_id="+product_id+"&ea="+ea;
+	}
+	
+}
+
+function del(product_id) {
+	if (confirm("상품코드 "+product_id+" 를 삭제 할거임?")) {
+		location.href="/shop/cart/del?product_id="+product_id;
+	}
+}
+
+function removeAll() {
+	if (confirm("장바구니 비울거임?")) {
+		location.href="/shop/cart/remove";
+	}
+}
+function buy() {
+	//결제 1단계 페이지 요청
+	location.href="/shop/step1.jsp";
+}
+</script>
 </head>
 <body>
-	<div id="header">
-		<a href="#" id="logo"><img src="/images/logo.gif" width="310"
-			height="114" alt=""></a>
-		<%@include file="/include/header.jsp"%>
-	</div>
-	<div id="body">
-		<div id="content">
-			<!-- 상세보기 -->			
-		</div>
-		<div class="featured">
-			<ul>
-				<li><a href="#"><img
-						src="images/organic-and-chemical-free.jpg" width="300" height="90"
-						alt=""></a></li>
-				<li><a href="#"><img src="images/good-food.jpg" width="300"
-						height="90" alt=""></a></li>
-				<li class="last"><a href="#"><img
-						src="images/pet-grooming.jpg" width="300" height="90" alt=""></a></li>
-			</ul>
-		</div>
-	</div>
-	<div id="footer">
-		<%@include file="/include/footer.jsp"%>
-	</div>
+<div id="header"> 
+	<%@ include file="/include/header.jsp" %>
+</div>
+<div id="body">
+  <div id="content">
+		<!-- 장바구니 표 -->
+		<h2>장바구니</h2>
+		<table width="100%">
+		  <tr>
+		    <th><input type="checkbox"/></th>
+		    <th>이미지</th>
+		    <th>상세정보</th>
+		    <th>수량</th>
+		    <th>변경</th>
+		  </tr>
+		  <%int totalBuy = 0; %>
+		  <%if(cartList!=null){%>
+		  <%for(int i=0;i<cartList.size();i++){%>
+		  <%Cart cart=cartList.get(i); %>
+		  <%
+		  	//가격 * 갯수
+		  	totalBuy += (cart.getPrice()*cart.getEa());
+		  %>
+		  <tr>
+		    <td><input type="checkbox"/></td>
+		    <td><img src="/data/<%=cart.getFilename()%>" width="45px"/></td>
+		    <td>
+		    	<ul>
+		    		<li>카테고리명:<%=cart.getCategory().getCategory_name() %></li>
+		    		<li>상품명:<%=cart.getProduct_name() %></li>
+		    		<li>브랜드:<%=cart.getBrand() %></li>
+		    		<li>가격:<%=cart.getPrice() %></li>
+		    	</ul>
+		    </td>
+		    <td>
+		    	<input type="text" id="t_<%=i %>" name="ea" value="<%=cart.getEa() %>"/>
+		    </td>
+		    <td>
+		    	<button id="bt_<%=i %>" onclick="edit(<%=cart.getProduct_id()%>, this.id)">수정</button>
+		    	<button onclick="del(<%=cart.getProduct_id()%>)">삭제</button>
+		    </td>
+		  </tr>
+		  <%} %>
+		  <%}else{%>
+		    <td style="text-align:center" colspan="5">
+		    	장바구니가 비어있습니다.
+		    </td>
+		  <%} %>
+		  <tr>
+		  	<td colspan="4" style="text-align: right"><%=totalBuy %>원</td>
+		  	<td colspan="1" style="text-align: right">
+		  		<button onclick="removeAll()">장바구니 비우기</button>
+		  		<button onclick="buy()">구매하기</button>
+		  	</td>
+		  </tr>
+		</table>		
+	  
+  </div>
+  <div class="featured">
+    <ul>
+      <li><a href="#"><img src="/images/organic-and-chemical-free.jpg" width="300" height="90" alt=""></a></li>
+      <li><a href="#"><img src="/images/good-food.jpg" width="300" height="90" alt=""></a></li>
+      <li class="last"><a href="#"><img src="/images/pet-grooming.jpg" width="300" height="90" alt=""></a></li>
+    </ul>
+  </div>
+</div>
+<div id="footer">
+  <%@ include file="/include/footer.jsp" %>
+</div>
 </body>
 </html>

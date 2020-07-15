@@ -1,4 +1,4 @@
-<%@page import="com.pet.model.product.Product"%>
+    <%@page import="com.pet.model.product.Product"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -13,10 +13,11 @@
 <link href="css/style.css" rel="stylesheet" type="text/css">
 <!--[if IE 6]><link href="css/ie6.css" rel="stylesheet" type="text/css"><![endif]-->
 <!--[if IE 7]><link href="css/ie7.css" rel="stylesheet" type="text/css"><![endif]-->
+
 </head>
 <body>
 	<div id="header">
-		<a href="#" id="logo"><img src="images/logo.gif" width="310" height="114" alt=""></a>
+		
 		<%@include file="/include/header.jsp"%>
 	</div>
 	<div id="body">
