@@ -23,7 +23,7 @@ public class MemberDAO {
 		Member obj = sessionTemplate.selectOne("Member.loginCheck", member);
 		
 		if (obj == null) { //회원이 없을 경우, 비즈니스적 예외상황
-			throw new DataNotFoundException("일치하는 정보가 없음");
+			throw new DataNotFoundException("로그인 정보가 올바르지 않음");
 		}
 		
 		return obj;

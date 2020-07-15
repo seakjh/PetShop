@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -120,16 +120,6 @@ input[type=button]:hover {
 </style>
 <script>
 $(function() {
-	//로그인 버튼 누르면...
-/* 	$("input[type='button']").click(function() {
-		$("form").attr({
-			"action" : "/admin/login",
-			"method" : "post"
-		});
-		$("form").submit();
-	});
-}); */
-$(function() {
 	$("#bt_login").on("click", function() {
 		$.ajax({
 			"url":"/member/login",
@@ -139,7 +129,15 @@ $(function() {
 				"password":$("input[name='password']").val()
 			},
 			success:function(result) {
-				alert(result);
+				console.log(result.code);
+				//성공한경우
+				if(result.code == undefined) {
+					alert(result.name+"님 ㅎㅇ");
+					location.href="/"; //메인을 요청					
+				}
+				else {
+					alert("로그인 실패");
+				}
 			}
 		});
 	});
@@ -175,8 +173,8 @@ $(function() {
 						</div>
 
 						<input type="text" name="id" placeholder="Username" required>
-						<input type="password" name="password" placeholder="Password"
-							required> <input type="button" value="Login">
+						<input type="password" name="password" placeholder="Password" required>
+						<input type="button" value="Login" id="bt_login">
 					</div>
 
 				</div>

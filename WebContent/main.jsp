@@ -1,7 +1,6 @@
     <%@page import="com.pet.model.product.Product"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
 <%
 	List<Product> productList = (List)request.getAttribute("productList");
 %>
@@ -89,8 +88,6 @@
 			</ul>
 		</div>
 	</div>
-	<div id="footer">
-		<%@include file="/include/header.jsp"%>
-	</div>
+	<%@include file="/include/footer.jsp"%>
 </body>
 </html>

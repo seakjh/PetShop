@@ -5,12 +5,16 @@
 <%
 	List<Cart> cartList=(List)session.getAttribute("cartList");
 %>
+<%
+	Member obj = (Member) session.getAttribute("member");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <title>Pet Shop</title>
 <meta charset="utf-8">
 <link href="/css/style.css" rel="stylesheet" type="text/css">
+<%@include file="/include/head.jsp" %>
 <style>
 
 input[type=text], select, textarea {
@@ -65,39 +69,19 @@ tr:nth-child(even) {
 
 <script type="text/javascript">
 $(function(){
-
+	$("input[type='checkbox']").click(function() {
+		alert();
+	});
 });
 
-function edit(product_id, id) {
-	var n = id.split("_")[1];
-	var ea = document.getElementById("t_"+n).value;
-	if(confirm(product_id+"상품의 갯수를 "+ea+"개로 수정할거?")) {
-		location.href="/shop/cart/edit?product_id="+product_id+"&ea="ea;
-	}
-	
-}
-
-function del(product_id) {
-	if (confirm("상품코드 "+product_id+" 를 삭제 할거임?")) {
-		location.href="/shop/cart/del?product_id="+product_id;
-	}
-}
-
-function removeAll() {
-	if (confirm("장바구니 비울거임?")) {
-		location.href="/shop/cart/remove";
-	}
-}
-function buy() {
-	//결제 1단계 페이지 요청
-	location.href="/shop/step1.jsp";
+//주문자 정보를 받을 사람으로 옮기기
+function copy() {
+	//
 }
 </script>
 </head>
 <body>
-	<div id="header">
-		<%@ include file="/include/header.jsp"%>
-	</div>
+	<%@ include file="/include/header.jsp"%>
 	<div id="body">
 		<div id="content">
 			<h2 style="margin-top: 50px">결제하기</h2>
@@ -162,9 +146,9 @@ function buy() {
 				</table>
 				<form>
 					<div id="buyer">
-						<input type="text" id="fname" name="firstname" placeholder="주문자">
-						<input type="text" id="lname" name="lastname" placeholder="주문자 연락처">
-						<input type="text" id="lname" name="lastname" placeholder="이메일">
+						<input type="text" id="" name="" value="<%=obj.getName()%>">
+						<input type="text" id="" name="" value="<%=obj.getPhone()%>">
+						<input type="text" id="" name="" value="<%=obj.getEmail()%>">
 						<select id="country" name="country">
 							<option value="0">결제방법</option>
 							<option value="card">신용카드</option>
@@ -174,9 +158,9 @@ function buy() {
 					</div>
 					<div id="receiver">
 						<input type="checkbox"> 주문자 정보와 동일
-						<input type="text" id="fname" name="firstname" placeholder="받는분 이름">
-						<input type="text" id="lname" name="lastname" placeholder="연락처">
-						<input type="text" id="lname" name="lastname" placeholder="주소">					
+						<input type="text" id="fname" name="rname"  value="" placeholder="받는분 이름">
+						<input type="text" id="lname" name="rphone" placeholder="연락처">
+						<input type="text" id="lname" name="raddr" placeholder="주소">					
 					</div>
 				</form>
 				

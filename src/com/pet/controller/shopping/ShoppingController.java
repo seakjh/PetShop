@@ -52,9 +52,20 @@ public class ShoppingController {
 	
 	//장바구니 목록 가져오기!!
 	@RequestMapping(value="/shop/cart/list",method=RequestMethod.GET)
-	public String getList() {
-		return "shop/cart";
+	public String getList(Model model,HttpSession session) {
+		//로그인 하지 않은 회원인 경우, 거부처리
+		String view = null;
+		if(session.getAttribute("member") == null) {
+			model.addAttribute("msg", "로그인하세요");
+			model.addAttribute("url", "/member/login.jsp");
+			view = "view/message";
+		}
+		else {
+			view = "redirect:/shop/cart.jsp";			
+		}
+		return view;
 	}
+	
 
 	//장바구니에서 상품 1개 삭제
 	@RequestMapping(value="/shop/cart/del",method=RequestMethod.GET)
@@ -101,5 +112,11 @@ public class ShoppingController {
 		model.addAttribute("url", "/shop/cart/list");
 		
 		return "view/message";
+	}
+	//구매1단계 화면 보기 (고객정보, 결제정보)
+	@RequestMapping(value="/shop/step1",method=RequestMethod.GET)
+	public String goStep1() {
+		//만일 db관련 작업이 있다면 여기서 처리..
+		return "shop/step1";
 	}
 }
