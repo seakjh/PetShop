@@ -1,7 +1,4 @@
-package com.pet.model.order;
-
-import com.pet.model.member.Member;
-import com.pet.model.receiver.Receiver;
+package com.pet.domain;
 
 public class OrderSummary {
 	private int order_summary_id;
@@ -9,7 +6,6 @@ public class OrderSummary {
 	private int total_pay;
 	private String order_date;
 	private String paymethod;
-	private String same;
 	private Receiver receiver;
 	
 	public int getOrder_summary_id() {
@@ -41,12 +37,6 @@ public class OrderSummary {
 	}
 	public void setPaymethod(String paymethod) {
 		this.paymethod = paymethod;
-	}
-	public String getSame() {
-		return same;
-	}
-	public void setSame(String same) {
-		this.same = same;
 	}
 	public Receiver getReceiver() {
 		return receiver;

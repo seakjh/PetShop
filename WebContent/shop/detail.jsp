@@ -1,4 +1,4 @@
-<%@page import="com.pet.model.product.Product"%>
+<%@page import="com.pet.domain.Product"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	Product product = (Product)request.getAttribute("product");
@@ -35,10 +35,10 @@ $(function(){
 		goCart();
 	});
 	
-	//바로구매
+/* 	//바로구매
 	$($("button")[1]).click(function() {
 		
-	});
+	}); */
 });
 
 function goCart() {
@@ -47,6 +47,14 @@ function goCart() {
 		"method":"post"
 	});
 	$("form").submit();
+}
+
+function buy() {
+	$("form").attr({
+		"action":"/shop/buy",
+		"method":"post"
+	});
+	$("form").submit();	
 }
 </script>
 </head>
@@ -77,7 +85,7 @@ function goCart() {
 					</ul>
 				</form>
 				<button>장바구니</button>
-				<button>바로구매</button>
+				<button onclick="buy()">바로구매</button>
 			</div>				
 		</div>
 		<div class="featured">

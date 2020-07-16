@@ -12,4 +12,10 @@
 		where id=#{id} and password=#{password}
 	</select>
 	
+	<!-- 회원정보 한건 가져오기 -->
+	<select id="select" parameterType="int" resultType="Member">
+		select * from member
+		where member_id=#{member_id}
+	</select>
+	
 </mapper>

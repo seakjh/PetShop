@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.pet.model.product.Product;
+import com.pet.domain.Product;
 import com.pet.model.product.ProductService;
 
 @Controller

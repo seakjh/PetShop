@@ -1,6 +1,4 @@
-package com.pet.model.receiver;
-
-import com.pet.model.order.OrderSummary;
+package com.pet.domain;
 
 public class Receiver {
 	//어떤 주문에 대한 받는자인지..
@@ -8,7 +6,7 @@ public class Receiver {
 	private String rname;
 	private String rphone;
 	private String raddr;
-	private OrderSummary orderSummary;
+	/* private OrderSummary orderSummary; */
 	//
 	public int getReceiver_id() {
 		return receiver_id;
@@ -34,11 +32,11 @@ public class Receiver {
 	public void setRaddr(String raddr) {
 		this.raddr = raddr;
 	}
-	public OrderSummary getOrderSummary() {
-		return orderSummary;
-	}
-	public void setOrderSummary(OrderSummary orderSummary) {
-		this.orderSummary = orderSummary;
-	}
+//	public OrderSummary getOrderSummary() {
+//		return orderSummary;
+//	}
+//	public void setOrderSummary(OrderSummary orderSummary) {
+//		this.orderSummary = orderSummary;
+//	}
 	
 }
