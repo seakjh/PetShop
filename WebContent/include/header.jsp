@@ -8,7 +8,7 @@
 		height="114" alt=""></a>
 	<ul class="navigation">
 		<li><a href="/product/list">쇼핑상품</a></li>
-		<li><a href="/event/list">찜한상품</a></li>
+		<li><a href="/event/list">기획상품</a></li>
 		<%if(member == null){ %>
 		<li><a href="javascript:alert('로그인하세요');">장바구니</a></li>
 		<%}else { %>

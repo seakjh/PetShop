@@ -12,6 +12,8 @@
 		<typeAlias type="com.pet.domain.OrderSummary" alias="OrderSummary"/>
 		<typeAlias type="com.pet.domain.OrderDetail" alias="OrderDetail"/>
 		<typeAlias type="com.pet.domain.Receiver" alias="Receiver"/>
+		<typeAlias type="com.pet.domain.Event" alias="Event"/>
+		<typeAlias type="com.pet.domain.EventProduct" alias="EventProduct"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/pet/mybatis/AdminMapper.xml"/>
@@ -21,6 +23,8 @@
 		<mapper resource="com/pet/mybatis/OrderSummaryMapper.xml"/>
 		<mapper resource="com/pet/mybatis/OrderDetailMapper.xml"/>
 		<mapper resource="com/pet/mybatis/ReceiverMapper.xml"/>
+		<mapper resource="com/pet/mybatis/EventMapper.xml"/>
+		<mapper resource="com/pet/mybatis/EventProductMapper.xml"/>
 	</mappers>
 	
 </configuration>

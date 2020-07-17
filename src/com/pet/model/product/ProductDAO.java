@@ -24,6 +24,11 @@ public class ProductDAO {
 		return sessionTemplate.selectList("Product.All");
 	}
 	
+	//관리자모드에서 기획상품과 같이 가져오기
+	public List selectAllJoin() {
+		return sessionTemplate.selectList("EventProduct.selectJoin");
+	}
+	
 	public Product select(int product_id) {
 		return sessionTemplate.selectOne("Product.byId", product_id);
 	}

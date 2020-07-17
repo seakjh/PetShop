@@ -33,9 +33,9 @@ tr:nth-child(even) {
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-function getDetail(product_id){
+function getDetail(order_summary_id){
 	//상세보기 요청 
-	location.href="/admin/product/detail?product_id="+product_id;
+	location.href="/admin/order/detail?order_summary_id="+order_summary_id;
 }
 </script>
 </head>
@@ -57,7 +57,7 @@ function getDetail(product_id){
 	<%for(int i=1;i<pager.getPageSize();i++){%>
 	<%if(num<1)break;%>	
 	<%OrderSummary orderSummary=orderList.get(curPos++); %>
-	<tr >
+	<tr onclick="getDetail(<%=orderSummary.getOrder_summary_id()%>)" onmouseover="">
 		<td><%=num-- %></td>
 		<td><%=orderSummary.getMember().getName()%></td>
 		<td><%=orderSummary.getTotal_pay()%></td>

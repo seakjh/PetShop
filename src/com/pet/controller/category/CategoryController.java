@@ -56,6 +56,7 @@ public class CategoryController {
 		
 		return sb.toString();
 	}
+	
 	@RequestMapping(value="/category/del",method=RequestMethod.GET)
 	@ResponseBody
 	public String delete(@RequestParam("category_id") int category_id) {

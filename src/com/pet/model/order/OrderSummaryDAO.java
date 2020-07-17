@@ -27,4 +27,8 @@ public class OrderSummaryDAO {
 	public List selectAll() {
 		return sessionTemplate.selectList("OrderSummary.selectAll");
 	}
+	
+	public OrderSummary select(int order_summary_id) {
+		return sessionTemplate.selectOne("OrderSummary.select", order_summary_id);
+	}
 }
