@@ -1,6 +1,8 @@
 package com.pet.controller.product;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -118,7 +120,25 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value="/event/list", method=RequestMethod.GET)
-	public String getEventList() {
+	public String getEventList(Model model) {
+		//어떤 기획이벤트가 있는지 목록 가져오자
+		List<Event> eventList = productService.getEventList();
+		
+		Map<String, List> listMap = new HashMap<String, List>();
+		Map<String, String> titleMap = new HashMap<String, String>();
+		
+		for (int i=0; i<eventList.size(); i++) {
+			Event event = eventList.get(i);
+			System.out.println(event.getTitle()+","+event.getEvent_id());
+			
+			//현재 이벤트에 등록된 상품목록 가져오기
+			List eventProductList = productService.selectJoinByEventId(event.getEvent_id());
+			listMap.put("eventProductList"+i, eventProductList);
+			titleMap.put("title"+i, event.getTitle());
+		}
+		System.out.println(listMap.size()+","+titleMap.size());
+		model.addAttribute("listMap", listMap);
+		model.addAttribute("titleMap", titleMap);		
 		return "event/list";
 	}
 
@@ -168,21 +188,17 @@ public class ProductController {
 	
 	//기존상품을
 	@RequestMapping(value="/admin/eventproduct/regist", method=RequestMethod.POST)
-	public String registEventProduct(Model model, @RequestParam int[] ch, @RequestParam int event_id, EventProduct eventProduct) {
+	public String registEventProduct(@RequestParam int[] product_id, EventProduct eventProduct) {
 		//System.out.println("선택한 이벤트의 유형은" + event_id);
-		Event event = productService.getEventOne(event_id);
-		eventProduct.setEvent(event);
 		
-		for (int i=0; i<ch.length; i++) {			
-			//System.out.println("등록된 상품 코드는" + ch[i]);
-			Product product = productService.select(ch[i]);
+		for(int i=0;i<product_id.length;i++) {
+			
+			Product product = new Product();
+			product.setProduct_id(product_id[i]);
 			eventProduct.setProduct(product);
 			productService.registEventProduct(eventProduct);
 		}
-		
-		model.addAttribute("url", "/admin/product/list");
-		model.addAttribute("msg", "이벤트 상품 등록 성공");
-		return "view/message";
+		return "redirect:/admin/product/list";
 	}
 	
 	@ExceptionHandler({FileException.class, DMLException.class})

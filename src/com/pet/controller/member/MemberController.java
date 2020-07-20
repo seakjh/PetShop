@@ -1,5 +1,7 @@
 package com.pet.controller.member;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
@@ -17,11 +19,15 @@ import com.pet.domain.Member;
 import com.pet.exception.DMLException;
 import com.pet.exception.DataNotFoundException;
 import com.pet.model.member.MemberService;
+import com.pet.model.order.OrderService;
 
 @Controller
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private OrderService orderService;
 	
 	@RequestMapping(value="/member/regist", method=RequestMethod.POST)
 	public String regist(Model model, Member member) {
@@ -55,6 +61,21 @@ public class MemberController {
 		model.addAttribute("url", "/");
 		
 		return "view/message";
+	}
+	
+	@RequestMapping(value = "/member/mypage", method = RequestMethod.GET)
+	public String getMyPage(Model model, HttpSession session) {		
+		//회원정보 MemberService
+		Member member = (Member)session.getAttribute("member");
+		model.addAttribute("member", member);
+		
+		//결제내역 OrderService
+		List orderList = orderService.selectAllByMember(member);
+		model.addAttribute("orderList", orderList);
+		
+		//상담내역 BoardService
+		
+		return "member/mypage";
 	}
 	
 	@ExceptionHandler({DataNotFoundException.class})

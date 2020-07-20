@@ -26,6 +26,11 @@ public class EventProductDAO {
 		return sessionTemplate.selectList("EventProduct.selectAll");
 	}
 	
+	//이벤트에 소속된 상품 가져오기!
+	public List selectJoinByEventId(int event_id) {
+		return sessionTemplate.selectList("EventProduct.selectJoinByEventId", event_id);
+	}
+	
 //	public EventProduct select(int event_product_id) {
 //		return sessionTemplate.selectOne("EventProduct.select", event_product_id);
 //	}

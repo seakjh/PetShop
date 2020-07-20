@@ -92,5 +92,9 @@ public class ProductService {
 	public List getEventProductList() {
 		return eventProductDAO.selectAll();
 	}
+	
+	public List selectJoinByEventId(int event_id) {
+		return eventProductDAO.selectJoinByEventId(event_id);
+	}
 
 }

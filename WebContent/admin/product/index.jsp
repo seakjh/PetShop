@@ -39,11 +39,15 @@ function getDetail(product_id){
 	location.href="/admin/product/detail?product_id="+product_id;
 }
 
+function regist() {
+	location.href="/admin/product/registForm.jsp";
+}
+
 function sendToEvent() {
 	//체크박스에 체크한게 있는지 유효성 검사부터 ㅅ하자
 	//체크박스에 체크한 경우 카운트를 1씩 증가시켜서 
 	//만일 증가된게 없다면 , 체크안한것이다!
-	var ch = document.getElementsByName("ch");
+	var ch = document.getElementsByName("product_id");
 	//alert("체크박스의 총 수는 : " + ch.length);
 
 	var count = 0;
@@ -81,7 +85,7 @@ function sendToEvent() {
 	<table>
 		<tr>
 			<td colspan="8">
-				<select name="event_id">
+				<select name="event.event_id">
 					<option value="0">이벤트 상품 선택</option>
 					<%for (int i=0; i<eventList.size(); i++) { %>
 					<%Event event = eventList.get(i); %>
@@ -98,6 +102,7 @@ function sendToEvent() {
 			 <th>상품명</th>
 			 <th>가격</th>
 			 <th>브랜드</th>
+			 <th>이벤트</th>
 		</tr>
 	  
 	 <%int curPos=pager.getCurPos(); %>	
@@ -107,7 +112,7 @@ function sendToEvent() {
 	  <%EventProduct eventProduct = productList.get(curPos++); %>
 	  <%Product product = eventProduct.getProduct(); %>
 	  <tr>
-	    <td><input type="checkbox" name="ch" value="<%=product.getProduct_id()%>"></td>
+	    <td><input type="checkbox" name="product_id" value="<%=product.getProduct_id()%>"></td>
 	    <td><%=num-- %></td>
 	    <td><img src="/data/<%=product.getFilename()%>" width="35px"/></td>
 	    <td><%=product.getCategory().getCategory_name()%></td>
@@ -115,7 +120,7 @@ function sendToEvent() {
 	    <td><%=product.getPrice() %></td>
 	    <td><%=product.getBrand() %></td>
 	    <td>
-		    <%if(eventProduct != null) {%>
+		    <%if(eventProduct.getEvent() != null) {%>
 	    	<%=eventProduct.getEvent().getTitle() %>
 	    	<%} else { %>
 	    		없음
@@ -123,9 +128,13 @@ function sendToEvent() {
 	    </td>
 	  </tr>
 	  <%} %>
+	  
+	</table>
+</form>
+	<table>
 	  <tr>
 	  	<td colspan="8" align="center">
-	  		<button onClick="location.href='/admin/product/registForm.jsp';">상품등록</button>
+	  		<button onclick="regist()">상품등록</button>
 			<button onclick="sendToEvent()">이벤트 상품 등록하기</button>
 	  	</td>
 	  </tr>
@@ -137,9 +146,7 @@ function sendToEvent() {
 			<%}%>
 	  	</td>
 	  </tr>
-	  
 	</table>
-</form>
 
 </body>
 </html>

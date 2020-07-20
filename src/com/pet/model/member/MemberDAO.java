@@ -30,4 +30,14 @@ public class MemberDAO {
 		return obj;
 	}
 	
+	public Member select(Member member) throws DataNotFoundException {
+		Member obj = sessionTemplate.selectOne("Member.select", member);
+		
+		if (obj == null) { //회원이 없을 경우, 비즈니스적 예외상황
+			throw new DataNotFoundException("로그인 정보가 올바르지 않음");
+		}
+		
+		return obj;
+	}
+	
 }

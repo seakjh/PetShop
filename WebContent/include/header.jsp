@@ -15,12 +15,12 @@
 		<li><a href="/shop/cart/list">장바구니</a></li>
 		<%} %>
 
-		<li><a href="/myPage/list">MyPage</a></li>
+		<li><a href="/member/mypage">MyPage</a></li>
 		<%if(member == null){ %>
 			<li><a href="/member/login.jsp">로그인</a></li>
 		<%}else { %>
 			<li><a href="/member/logout">로그아웃</a></li>
 		<%} %>
-		<li><a href="/cs/main">1:1상담</a></li>
+		<li><a href="/cs/list">1:1상담</a></li>
 	</ul>
 </div>

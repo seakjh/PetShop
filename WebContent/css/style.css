@@ -4,10 +4,15 @@ body {
 	background: url("/images/bg-body.gif");
 	background-repeat:repeat-x;
 }
+
+table, td{
+	border-collapse: collapse;
+}
+
 #page {
 }
 #header {
-	width:960px;
+	width:1280px;
 	height:72px;
 	position:relative;
 	margin:0 auto;
@@ -64,7 +69,7 @@ body {
 	height:606px;
 }
 #body div#content {
-	width:960px;
+	width:1280px;
 	margin:0 auto;
 	overflow:hidden;
 	background-image:none;
@@ -73,7 +78,7 @@ body {
 }
 #body div#content .content {
 	float:left;
-	width:640px;
+	width:840px;
 	margin-right:20px;
 	background-image:none;
 	height:auto;
@@ -89,7 +94,7 @@ body {
 	list-style-type:none;
 }
 #body #content .content ul li {
-	width:300px;
+	width:400px;
 	padding:0 10px;
 	margin:0 0 20px 0;
 	float:left;
@@ -905,7 +910,7 @@ body {
 #body .featured ul {
 	margin:0 auto;
 	padding:0;
-	width:960px;
+	width:1280px;
 	list-style-type:none;
 }
 #body .featured ul li {
@@ -931,7 +936,7 @@ body {
 	background-image:none;
 }
 #footer .section {
-	width:960px;
+	width:1280px;
 	margin:0 auto;
 	overflow:hidden;
 	position:relative;
@@ -994,7 +999,7 @@ body {
 	background-color:#ffad00;
 }
 #footer #footnote .section {
-	width:960px;
+	width:1280px;
 	height:50px;
 	text-align:center;
 	line-height:50px;

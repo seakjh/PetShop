@@ -22,6 +22,13 @@
 		from product p left outer join event_product ep
 		on p.product_id = ep.product_id
 	</select>
+	
+	<select id="selectJoinByEventId" parameterType="int" resultMap="joinMap">
+		select p.product_id as product_id, event_id, event_product_id
+		from product p , event_product ep
+		where p.product_id = ep.product_id
+		and event_id=#{event_id}
+	</select>
 
 	<select id="select" parameterType="int" resultMap="joinMap">
 		select * from event_product

@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.pet.domain.Member;
 import com.pet.domain.OrderSummary;
 import com.pet.exception.DMLException;
 
@@ -30,5 +31,10 @@ public class OrderSummaryDAO {
 	
 	public OrderSummary select(int order_summary_id) {
 		return sessionTemplate.selectOne("OrderSummary.select", order_summary_id);
+	}
+	
+	//해당 회원의 모든 주문목록 가져오기
+	public List selectAllByMember(Member member) {
+		return sessionTemplate.selectList("OrderSummary.selectAllByMember", member);
 	}
 }

@@ -32,5 +32,16 @@
 		select * from order_summary
 		where order_summary_id=#{order_summary_id}
 	</select>
-
+	
+	   <!-- 회원의 모든 주문목록 가져오기    -->
+	<select id="selectAllByMember" parameterType="Member" resultMap="joinMap">
+		select order_summary_id
+		, total_pay
+		, order_date
+		, o.member_id as member_id
+		, receiver_id
+		from order_summary o, member m
+		where o.member_id=m.member_id
+		and id=#{id} and password=#{password}
+	</select>
 </mapper>
