@@ -4,9 +4,11 @@
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
 	
 	<!-- 공통 로직이 아니라, 요청을 처리하는 컨트롤러 관련 빈 객체만을 
 	등록할 예정 -->
@@ -51,6 +53,36 @@
 			</bean>
 		</mvc:message-converters>
 	</mvc:annotation-driven>
+	
+	<!-- 작동시키길 원하는 공통 코드 등록 -->
+	<!-- <bean id="logger" class="com.pet.log.MyLogger" /> -->
+	
+	<!-- 언제 어디에 어떤방법으로 동작할지를 서술 
+	<aop:config>
+		<aop:aspect ref="logger">
+			<aop:pointcut expression="execution(public * com.pet.controller..*(..))" id="controllerPointcut"/>
+			<aop:after method="log" pointcut-ref="controllerPointcut"/>
+		</aop:aspect>
+	</aop:config>-->
+	
+	<!-- <aop:config>
+		<aop:aspect ref="logger">
+			<aop:pointcut expression="execution(public * com.pet.model..*(..))" id="servicePointcut"/>
+			<aop:after method="log" pointcut-ref="servicePointcut"/>
+		</aop:aspect>
+	</aop:config> -->
+	
+	<!-- 공토오드로 사용딜 Aspect 등록 -->
+	<bean class="com.pet.log.TestLog" id="testLog"/>
+	
+	<!-- aop -->
+	<aop:config>
+		<aop:aspect ref="testLog">
+			<aop:pointcut expression="execution(public * com.pet.controller.product.ProductController.*(..))" id="productControllerPointcut"/>
+			<aop:before method="showMessage" pointcut-ref="productControllerPointcut"/>
+		</aop:aspect>
+	</aop:config>
+	
 </beans>
 
 

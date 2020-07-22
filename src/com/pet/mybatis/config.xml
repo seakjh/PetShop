@@ -15,6 +15,9 @@
 		<typeAlias type="com.pet.domain.Event" alias="Event"/>
 		<typeAlias type="com.pet.domain.EventProduct" alias="EventProduct"/>
 		<typeAlias type="com.pet.domain.Board" alias="Board"/>
+		<typeAlias type="com.pet.domain.Dept" alias="Dept"/>
+		<typeAlias type="com.pet.domain.Emp" alias="Emp"/>
+		
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/pet/mybatis/AdminMapper.xml"/>
@@ -27,6 +30,8 @@
 		<mapper resource="com/pet/mybatis/EventMapper.xml"/>
 		<mapper resource="com/pet/mybatis/EventProductMapper.xml"/>
 		<mapper resource="com/pet/mybatis/BoardMapper.xml"/>
+		<mapper resource="com/pet/mybatis/DeptMapper.xml"/>
+		<mapper resource="com/pet/mybatis/EmpMapper.xml"/>
 	</mappers>
 	
 </configuration>
