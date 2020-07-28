@@ -72,17 +72,27 @@
 		</aop:aspect>
 	</aop:config> -->
 	
-	<!-- 공토오드로 사용딜 Aspect 등록 -->
-	<bean class="com.pet.log.TestLog" id="testLog"/>
+	<!-- 공토오드로 사용딜 Aspect 등록 
+	<bean class="com.pet.log.TestLog" id="testLog"/>-->
 	
-	<!-- aop -->
+	<!-- aop 
 	<aop:config>
 		<aop:aspect ref="testLog">
 			<aop:pointcut expression="execution(public * com.pet.controller.product.ProductController.*(..))" id="productControllerPointcut"/>
 			<aop:before method="showMessage" pointcut-ref="productControllerPointcut"/>
 		</aop:aspect>
 	</aop:config>
+	-->
+	<!-- 로그인 체크 빈 객체 등록 -->
+	<bean class="com.pet.aop.LoginCheckAspect" id="loginCheckAspect"/>
 	
+	<!-- 어떤 공통코드를 어느 지점에 어느 시점에 넣을지..-->
+	<aop:config>
+		<aop:aspect ref="loginCheckAspect">
+			<aop:pointcut expression="execution(public * com.pet.controller..*(..))" id="methodPointcut"/>
+			<aop:around method="loginCheck" pointcut-ref="methodPointcut"/>
+		</aop:aspect>
+	</aop:config>
 </beans>
 
 

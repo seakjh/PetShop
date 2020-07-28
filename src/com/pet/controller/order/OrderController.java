@@ -29,7 +29,7 @@ public class OrderController {
 	//목록보기
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public String selectAll(Model model, HttpServletRequest request) {
-		System.out.println("주문 목록이 궁금해?");
+		//System.out.println("주문 목록이 궁금해?");
 		
 		List<OrderSummary> orderList = orderService.selectAll();
 		pager.init(orderList, request);
@@ -37,8 +37,8 @@ public class OrderController {
 		model.addAttribute("orderList", orderList);
 		model.addAttribute("pager", pager);
 
-		System.out.println(orderList);
-		System.out.println(pager);
+		//System.out.println(orderList);
+		//System.out.println(pager);
 		return "admin/order/list";
 	}
 	

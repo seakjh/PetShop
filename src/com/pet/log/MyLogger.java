@@ -7,6 +7,6 @@ public class MyLogger {
 	public void log(JoinPoint joinPoint) {
 		String className = joinPoint.getTarget().getClass().getName(); // 공통
 		String methodName = joinPoint.getSignature().getName();
-		System.out.println(className+" + "+methodName+" @메서드 호출");
+		//System.out.println(className+" + "+methodName+" @메서드 호출");
 	}
 }

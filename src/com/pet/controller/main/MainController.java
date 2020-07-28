@@ -2,6 +2,8 @@ package com.pet.controller.main;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +23,7 @@ public class MainController {
 	 * --------------------------------------------------------------------------------------------------
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String main(Model model) {
+	public String main(Model model, HttpServletRequest request) {
 		System.out.println("메인 호출함 ");
 		  List<Product> productList = productService.selectAll();
 		  model.addAttribute("productList", productList);

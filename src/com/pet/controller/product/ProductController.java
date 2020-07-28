@@ -65,7 +65,7 @@ public class ProductController {
 		List<Product> productList = productService.selectAllJoin();
 		List<Event> eventList = productService.getEventList();
 		
-		System.out.println(request.getServletContext().getRealPath("/data/"));
+		//System.out.println(request.getServletContext().getRealPath("/data/"));
 
 		//페이징 처리 객체 
 		pager.init(productList, request);

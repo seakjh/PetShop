@@ -12,7 +12,14 @@
 <link href="css/style.css" rel="stylesheet" type="text/css">
 <!--[if IE 6]><link href="css/ie6.css" rel="stylesheet" type="text/css"><![endif]-->
 <!--[if IE 7]><link href="css/ie7.css" rel="stylesheet" type="text/css"><![endif]-->
-
+<style type="text/css">
+#realTime{
+	background: green;
+	width: 300px;
+	height: 300px;
+	overflow: hidden;
+}
+</style>
 </head>
 <body>
 	<div id="header">
@@ -34,47 +41,13 @@
 					<%} %>
 				</ul>
 			</div>
+			
 			<div id="sidebar">
-				<div class="search">
-					<input type="text" name="s" value="Find">
-					<button>&nbsp;</button>
-					<label for="articles"> <input type="radio" id="articles">
-						Articles
-					</label> <label for="products"> <input type="radio" id="products"
-						checked> PetMart Products
-					</label>
-				</div>
-				<div class="section">
-					<ul class="navigation">
-						<li class="active"><a href="#">Shopping Guides</a></li>
-						<li><a href="#">Discounted Items</a></li>
-					</ul>
-					<div class="aside">
-						<div>
-							<div>
-								<ul>
-									<li><a href="#">Pet Accesories </a> <a class="more"
-										href="#">see all</a></li>
-									<li><a href="#">Bath Essentials</a> <a class="more"
-										href="#">see all</a></li>
-									<li><a href="#">Pet Food</a> <a class="more" href="#">see
-											all</a></li>
-									<li><a href="#">Pet Vitamins</a> <a class="more" href="#">see
-											all</a></li>
-									<li><a href="#">Pet Needs</a> <a class="more" href="#">see
-											all</a></li>
-									<li><a href="#">Pet Toy and Treats</a> <a class="more"
-										href="#">see all</a></li>
-									<li><a href="#">Pet Supplies</a> <a class="more" href="#">see
-											all</a></li>
-									<li><a href="#">Pet Emergency Kit</a> <a class="more"
-										href="#">see all</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
+				<div id="realTime">
+					<iframe src="http://127.0.0.1:3000/basic/client.html" width="300px" height="300px" frameborder="0"></iframe>
 				</div>
 			</div>
+			
 		</div>
 		<div class="featured">
 			<ul>
